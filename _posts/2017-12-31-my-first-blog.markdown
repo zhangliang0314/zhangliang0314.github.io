@@ -1,9 +1,8 @@
 ---
 layout:     post
-title:      "我的第一篇博客"
-subtitle:   "my first blog"
+title:      "我的第一篇博客 "
+subtitle:   "my first blog "
 date:       2017-12-31 23:00:00
-author:     "Hector.Z"
 header-img: "img/post-think-try-write.jpg"
 tags:
     - 聊聊
