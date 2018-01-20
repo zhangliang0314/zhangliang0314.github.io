@@ -1,7 +1,4 @@
-# Bobop.C Blog
-
-###[http://playingfingers.com](http://playingfingers.com)
-
+# Hectoor.Z Blog
 
 ## Thanks
 
