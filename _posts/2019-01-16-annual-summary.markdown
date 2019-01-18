@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "二零一八年度总结——年轻，就应肆意奔跑 "
-subtitle:   "examination`s mood "
+subtitle:   "2018,Annual summary "
 date:       2019-01-16 11:00:00
 author:     "Hector.Z"
 header-img: "img/post-think-try-write.jpg"
