@@ -12,7 +12,7 @@ tags:
 ## selectByExample VS eselectByExampleWithBLOBs
 - 首先在mapper.xml中查看这两个SQL查询语句
   - 发现两段SQL查询返回的resultMap不同，一个是BaseResultMap，另一个是ResultMapWithBLOBs。
-#####selectByExample
+- selectByExample
 ```xml
 <select id="selectByExample" parameterType="com.macro.mall.tiny.mbg.model.PmsBrandExample" resultMap="BaseResultMap">
     select
@@ -29,7 +29,7 @@ tags:
     </if>
 </select>
 ```
-#####selectByExampleWithBLOBs
+- selectByExampleWithBLOBs
 ```xml
 <select id="selectByExampleWithBLOBs" parameterType="com.macro.mall.tiny.mbg.model.PmsBrandExample" resultMap="ResultMapWithBLOBs">
     select
@@ -51,7 +51,7 @@ tags:
 - 再来看这两个SQL查询语句的resultMap
   - 发现ResultMapWithBLOBs继承了BaseResultMap，不仅有了BaseResultMap中的属性，同时也有了自己的brand_story属性。而brand_story在数据库中存入的是text类型。text属于大字段，
 故如需检索的字段中包含大字段类型时，必须用selectByExampleWithBLOBs，不检索大字段时，用selectByExample就足够了。update同样如此。
-#####BaseResultMap
+- BaseResultMap
 ```xml
 <resultMap id="BaseResultMap" type="com.macro.mall.tiny.mbg.model.PmsBrand">
     <id column="id" jdbcType="BIGINT" property="id" />
@@ -66,7 +66,7 @@ tags:
     <result column="big_pic" jdbcType="VARCHAR" property="bigPic" />
 </resultMap>
 ```
-#####ResultMapWithBLOBs
+- ResultMapWithBLOBs
 ```xml
 <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.macro.mall.tiny.mbg.model.PmsBrand">
     <result column="brand_story" jdbcType="LONGVARCHAR" property="brandStory" />
