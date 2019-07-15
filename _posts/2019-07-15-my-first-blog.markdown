@@ -2,7 +2,7 @@
 layout:     post
 title:      "Hello World ! "
 subtitle:   "my first blog "
-date:       2019-7-151 20:00:00
+date:       2019-7-15 20:00:00
 author:     "zhangliang"
 header-img: "img/post-think-try-write.jpg"
 tags:
