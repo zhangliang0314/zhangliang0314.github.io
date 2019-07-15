@@ -1,11 +1,11 @@
 # Site settings
-title: Hector ’s Blog
-SEOTitle: Hector.Z的博客 | Hector.Z Blog
+title: zhangliang ’s Blog
+SEOTitle: 张亮的博客 | zhangliang ’s Blog
 header-img: img/home-bg.jpg
-email: 418918345@qq.com
-description: "May Your Heart Be The Map"
+email: 604763503@qq.com
+description: "just 4 fun"
 keyword: ""
-url: "https://hectoor.github.io/"              # your host, for absolute URL
+url: "https://zhangliang0314.github.io/"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 
@@ -13,7 +13,7 @@ baseurl: ""                             # for example, '/blog' if your blog host
 # SNS settings
 RSS: false
 # weibo_username:   
-github_username:    Hectoor  
+github_username:    zhangliang0314  
 #zhihu_username:     
 #twitter_username:  
 #facebook_username:  
@@ -55,7 +55,7 @@ duoshuo_share: false                     # set to false if you want to use Comme
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "一定会更疯狂。"
+sidebar-about-description: "非淡泊无以明志，非宁静无以致远。"
 sidebar-avatar: /img/hector.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
@@ -67,21 +67,21 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 
 
 # Friends
-friends: [
-    {
-        title: "Bebop.C Blog",
-        href: "#"
-    },{
-        title: "Spike Spiegel",
-        href: "#"
-    },{
-        title: "Jet Black",
-        href: "#"
-    },{
-        title: "Faye Valentine",
-        href: "#"
-    },{
-        title: "Ein",
-        href: "#"
-    }
-]
+# friends: [
+#     {
+#         title: "Bebop.C Blog",
+#         href: "#"
+#     },{
+#         title: "Spike Spiegel",
+#         href: "#"
+#     },{
+#         title: "Jet Black",
+#         href: "#"
+#     },{
+#         title: "Faye Valentine",
+#         href: "#"
+#     },{
+#         title: "Ein",
+#         href: "#"
+#     }
+# ]
