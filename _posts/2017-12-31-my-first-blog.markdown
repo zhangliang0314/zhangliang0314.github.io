@@ -1,32 +1,22 @@
 ---
 layout:     post
-title:      "我的第一篇博客 "
+title:      "Hello World ! "
 subtitle:   "my first blog "
-date:       2017-12-31 23:00:00
-author:     "Hector.Z"
+date:       2019-7-151 20:00:00
+author:     "zhangliang"
 header-img: "img/post-think-try-write.jpg"
 tags:
-    - 聊聊
+    - just 4 fun
 ---
 
-## 欢迎光临。
+## Hello World
+发现了一个需要记录的知识，
+但是身边没有纸笔，
+只有一台笔记本，
+便想着用博客来记录我学习的过程
+便于自己查看与整理
 
-我是一枚新晋程序猿小白。
-
-倒腾了一晚上github，却还是一脸蒙圈。
-
-可是终于还是能用了。
-
-我的爱好是听听音乐，同时路上看看风景。
-
-嗯，是时候开个博客记录一下自己的生活了。
- 
-我希望能把自己的想法和学到的东西分享给大家。
-
-今天是2017的最后一天，也是我打开世界的第一天。
-
-最后送上一行命令吧 ——
-
+                ——the first
 ```
-$ echo "Hello World"
+"Hello World"
 ```
