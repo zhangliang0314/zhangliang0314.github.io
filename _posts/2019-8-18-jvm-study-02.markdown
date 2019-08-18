@@ -1,0 +1,90 @@
+---
+layout:     post
+title:      "类加载学习笔记一 "
+subtitle:   "类加载器 "
+date:       2019-8-18 18:00:00
+author:     "zhangliang"
+header-img: "img/post-think-try-write.jpg"
+tags:
+    - JVM
+---
+
+
+### 类加载器
+**类加载器**
+定义：通过一个类的全限定名来获取描述此类的二进制字节流，这个动作在JVM外部去实现，以便让应用程序自己决定如何去获取所需要的类。
+种类：
+
+1. JVM自带的加载器
+* 启动类加载器 Bootstrap ClassLoader：虚拟机自身的一部分，C++实现。负责将存放在<JAVA_HOME>\lib目录下，或者被-Xbootclasspath参数指定的路径中，并且是JVM识别的如rt.jar，一般用null替代。sun.boot.class.path
+* 扩展类加载器 Extension ClassLoader：sun.misc.Launcher $ExtClassLoader实现，加载<JAVA_HOME>\lib\ext或者java.ext.dirs
+* 系统（应用）类加载器 Application ClassLoader：sun.misc.Launcher $AppClassLoader实现，是getSystemClassLoader（）的返回值，负责加载ClassPath下或者java.class.path
+2. 用户自定义的类加载器
+* java.lang.ClassLoader的子类
+
+**命名空间**
+
+* 每个类加载器都有自己的命名空间，由该类加载器及其所有父加载器所加载的类组成。
+* 在同一个命名空间，不会出现类的全限定名相同的两个类。
+* 在不同一个命名空间，可能出现类的全限定名相同的两个类。
+* 比较两个类是否相等，必须在这两个类是在同一类加载器加载的前提下才有意义。
+
+**双亲委派机制**
+前提：除了顶层的启动类加载器外，其余的类加载器都应当有自己的父类加载器，他们的父子关系不是继承的关系，而是包含的关系，使用组合关系来复用父加载器的代码。即自加载器包含一个父加载器的引用。
+
+定义：如果一个类加载器收到了类加载的请求，首先不会自己去尝试加载这个类，而是把这个请求委派给父类加载器去完成。每一个层次的加载器都是如此。因此所有的加载请求最终都应该送到顶层的启动类加载器，只有当父加载器反馈自己无法完成这个加载请求时，子加载器才会尝试自己加载
+
+优势：
+①可以确保java核心库的类型安全：比如所有的java应用都至少会引用java.lang.Object类，也就是说在运行期，java.lang.Object这个类会被加载到java虚拟机中。如果这个加载过程由java应用自己的类加载器完成，那么很可能会在JVM中存在多个版本的java.lang.Object类，而且这些类之间还是不兼容的，相互不可见的（由于命名空间发挥的作用）。借助于双亲委派机制，java核心库的类的加载工作都是由启动类加载器来统一完成的，从而确保了java应用所示的都是同一个版本的java核心类库，他们之间是相互兼容的。
+②课题确保java核心类库不会被自定义的类所替代
+③不同的类加载器可以为相同名称的类创建额外的命名空间，相同名称的类可以并存在java虚拟机中，只需要用不同的类加载器来加载他们即可。不同类加载器加载的类之间总是不兼容的，这就相当于在java虚拟机内部创建了一个又一个相互隔离的java类空间。
+
+实现：先检查是否被加载过，若没有则盗用父加载器的loadClass（）方法，若父加载器为空，则默认使用启动类加载器作为父加载器。如果父类加载失败，抛出ClassNotFoundException异常后，在调用自己的findClass（）方法进行加载。
+
+
+```
+protected Class<?> loadClass(String name, boolean resolve)
+        throws ClassNotFoundException
+    {
+        synchronized (getClassLoadingLock(name)) {
+            // First, check if the class has already been loaded
+            Class<?> c = findLoadedClass(name);
+            if (c == null) {
+                long t0 = System.nanoTime();
+                try {
+                    if (parent != null) {
+                        c = parent.loadClass(name, false);
+                    } else {
+                        c = findBootstrapClassOrNull(name);
+                    }
+                } catch (ClassNotFoundException e) {
+                    // ClassNotFoundException thrown if class not found
+                    // from the non-null parent class loader
+                }
+
+                if (c == null) {
+                    // If still not found, then invoke findClass in order
+                    // to find the class.
+                    long t1 = System.nanoTime();
+                    c = findClass(name);
+
+                    // this is the defining class loader; record the stats
+                    sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);
+                    sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);
+                    sun.misc.PerfCounter.getFindClasses().increment();
+                }
+            }
+            if (resolve) {
+                resolveClass(c);
+            }
+            return c;
+        }
+    }
+
+```
+
+
+
+注意：启动类加载器是C++编写的，其他的类加载器都是java类
+那么这些java编写的类加载器也是一个类，肯定需要类加载器来加载，加载第一个纯java类加载器的就是启动类加载器。内建于JVM中的启动类加载器会加载java.lang.ClassLoader以及其他java平台类，当JVM启动时，一块特殊的机器码会运行，他会加载扩展类加载器和系统类加载器。
+启动类加载器是特定于平台的及其指令，他负责开启整个加载过程。启动类加载器还会负责加载供JRE正常运行所需要的基本组件，包括java.util和java.lang等。
