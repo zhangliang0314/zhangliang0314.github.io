@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "类加载学习笔记一 "
-subtitle:   "类加载器 "
+title:      "类加载学习笔记二 "
+subtitle:   "类加载器以及双亲委派机制"
 date:       2019-8-18 18:00:00
 author:     "zhangliang"
 header-img: "img/post-think-try-write.jpg"
